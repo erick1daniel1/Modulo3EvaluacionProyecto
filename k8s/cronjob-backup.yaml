@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: db-backup
+  namespace: backend-dev
+spec:
+  schedule: "0 */3 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup
+            image: danielparedes/backup-job:1.0
+            envFrom:
+              - secretRef:
+                  name: aws-credentials
+          restartPolicy: OnFailure
