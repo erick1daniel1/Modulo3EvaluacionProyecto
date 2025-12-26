@@ -1,0 +1,15 @@
+pipeline {
+  agent any
+  stages {
+    stage('Deploy Backend') {
+      steps {
+        sh '''
+        cd /home/jenkins/código/paredes
+        docker-compose down || true
+        docker-compose pull
+        docker-compose up -d
+        '''
+      }
+    }
+  }
+}
