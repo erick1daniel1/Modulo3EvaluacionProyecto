@@ -1,0 +1,19 @@
+name: Deploy Modificador
+
+on:
+  push:
+    branches:
+      - modificador
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Mostrar driver configurado
+        run: |
+          echo "Driver configurado:"
+          grep MY_DATABASE_DRIVER .env || echo "Variable no encontrada"
